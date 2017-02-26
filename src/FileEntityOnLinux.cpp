@@ -53,6 +53,19 @@ void FileEntityOnLinux::SetFullPath(string arg) {
     fullPath.assign(arg);
 }
 
+string FileEntityOnLinux::GetFullPath() {
+    if (fullPath.length() != 0) {
+        return fullPath;
+    }
+    else {
+        string ret;
+        ret.assign(directory);
+        ret.append("/");
+        ret.append(fileName);
+        return ret;
+    }
+}
+
 void FileEntityOnLinux::ReadPrepare(bool asBinary) {
     if (writePrepared) {
         readPrepared = false;
@@ -403,6 +416,29 @@ bool FileEntityOnLinux::IsDeleteSuccess() {
     return deleteSuccess;
 }
 
+void FileEntityOnLinux::CopyFile(string fileName) {
+    ifstream from(GetFullPath());
+    if (!from) {
+        return;
+    }
+    ofstream to(fileName.c_str());
+    if (!to) {
+        return;
+    }
+    to << from.rdbuf() << flush;
+    if (!from) {
+        return;
+    }
+    if (!to) {
+        return;
+    }
+    copySuccess = true;
+}
+
+bool FileEntityOnLinux::IsCopySuccess() {
+    return copySuccess;
+}
+
 FileEntityOnLinux::FileEntityOnLinux() {
     directory = string();
     fileName = string();
@@ -417,6 +453,7 @@ FileEntityOnLinux::FileEntityOnLinux() {
     readSuccess = false;
     writeSuccess = false;
     deleteSuccess = false;
+    copySuccess = false;
     disposed = false;
 }
 

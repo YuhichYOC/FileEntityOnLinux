@@ -59,6 +59,8 @@ private:
 
     bool deleteSuccess;
 
+    bool copySuccess;
+
     bool disposed;
 
     int CountFileSize();
@@ -74,6 +76,8 @@ public:
     string GetFileName();
 
     void SetFullPath(string arg);
+
+    string GetFullPath();
 
     void ReadPrepare(bool asBinary);
 
@@ -128,6 +132,10 @@ public:
     void DeleteExistingFile();
 
     bool IsDeleteSuccess();
+
+    void CopyFile(string fileName);
+
+    bool IsCopySuccess();
 
     FileEntityOnLinux();
 
