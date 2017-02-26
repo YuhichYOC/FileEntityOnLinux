@@ -83,10 +83,25 @@ void TestMethod04() {
     }
 }
 
+void TestMethod05() {
+    FileEntityOnLinux f1;
+    f1.SetDirectory("/home/mssqlserver/box/テスト");
+    f1.SetFileName("test05.txt");
+    cout << "Full path of f1 is        " << f1.GetFullPath() << "\n";
+    cout << "Directory name of f1 is   " << f1.GetDirectory() << "\n";
+    cout << "File name of f1 is        " << f1.GetFileName() << "\n";
+    FileEntityOnLinux f2;
+    f2.SetFullPath("/home/mssqlserver/box/テスト/test05.txt");
+    cout << "Full path of f2 is        " << f2.GetFullPath() << "\n";
+    cout << "Directory name of f2 is   " << f2.GetDirectory() << "\n";
+    cout << "File name of f2 is        " << f2.GetFileName() << "\n";
+}
+
 int main(int argc, char * argv[]) {
     TestMethod01();
     TestMethod02();
     TestMethod03();
     TestMethod04();
+    TestMethod05();
     return 0;
 }

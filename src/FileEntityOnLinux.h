@@ -71,6 +71,8 @@ public:
 
     void SetDirectory(string arg);
 
+    string GetDirectory();
+
     void SetFileName(string arg);
 
     string GetFileName();

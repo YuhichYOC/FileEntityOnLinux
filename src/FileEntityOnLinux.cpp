@@ -38,10 +38,18 @@ void FileEntityOnLinux::FetchOnce() {
 }
 
 void FileEntityOnLinux::SetDirectory(string arg) {
+    string newFullPath = arg + '/' + fileName;
+    fullPath = newFullPath;
     directory.assign(arg);
 }
 
+string FileEntityOnLinux::GetDirectory() {
+    return directory;
+}
+
 void FileEntityOnLinux::SetFileName(string arg) {
+    string newFullPath = directory + '/' + arg;
+    fullPath = newFullPath;
     fileName.assign(arg);
 }
 
@@ -50,6 +58,10 @@ string FileEntityOnLinux::GetFileName() {
 }
 
 void FileEntityOnLinux::SetFullPath(string arg) {
+    string newDirectory = arg.substr(0, arg.find_last_of('/'));
+    directory = newDirectory;
+    string newFileName = arg.substr(arg.find_last_of('/') + 1);
+    fileName = newFileName;
     fullPath.assign(arg);
 }
 
@@ -58,11 +70,7 @@ string FileEntityOnLinux::GetFullPath() {
         return fullPath;
     }
     else {
-        string ret;
-        ret.assign(directory);
-        ret.append("/");
-        ret.append(fileName);
-        return ret;
+        return directory + '/' + fileName;
     }
 }
 
